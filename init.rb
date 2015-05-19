@@ -177,6 +177,7 @@ private
     envs = env.keys.sort.map { |key| "ENV #{key} #{env[key]}" }.join("\n")
     IO.write("#{dir}/Dockerfile", <<-DOCKERFILE.split("\n").map { |l| l.strip }.join("\n"))
       FROM #{base}
+      RUN apt-get update
       RUN apt-get install squashfs-tools
       RUN rm -rf /app
       RUN curl '#{url}' -o /slug.img
