@@ -196,7 +196,7 @@ private
   end
 
   def build_image(dir, tag)
-    system "docker build -t #{tag} #{dir}"
+    system "docker -d build -t #{tag} #{dir}"
   end
 
   def env_minus_config(app)
