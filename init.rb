@@ -110,7 +110,7 @@ class Heroku::Command::Docker < Heroku::Command::Base
       write_envfile dir, config
       docker_args = [ "-P", %{--env-file="#{dir}/.env"}, "-u daemon" ]
       docker_args.push (options[:detach] ? "-d" : "-it")
-      system %{ docker run #{docker_args.join(" ")} #{image} #{args.join(" ")} }
+      system %{ docker -d run #{docker_args.join(" ")} #{image} #{args.join(" ")} }
     end
   end
 
@@ -196,7 +196,7 @@ private
   end
 
   def build_image(dir, tag)
-    system "docker -d build -t #{tag} #{dir}"
+    system "docker build -t #{tag} #{dir}"
   end
 
   def env_minus_config(app)
