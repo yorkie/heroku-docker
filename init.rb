@@ -180,7 +180,6 @@ private
       RUN rm -rf /app
       RUN curl '#{url}' -o /slug.img
       RUN (cd / && mkdir /app && tar -xzf /slug.img) && rm -f /app/log /app/tmp && mkdir /app/log /app/tmp &&  chown -R daemon:daemon /app && chmod -R go+r /app && find /app -type d | xargs chmod go+x
-      ADD database.yml /app/config/database.yml
       #{envs}
       WORKDIR /app
       EXPOSE 5000
